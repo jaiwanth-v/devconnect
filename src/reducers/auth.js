@@ -39,7 +39,7 @@ export default function (state = initialState, action) {
     case AUTH_ERROR:
     case LOGIN_FAIL:
     case LOGOUT:
-      // if (localStorage.token) localStorage.removeItem("token", payload.token);
+      if (localStorage.token) localStorage.removeItem("token");
       return {
         ...state,
         token: null,

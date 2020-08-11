@@ -13,6 +13,18 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
           <span className="hide-sm">Logout</span>
         </Link>
       </li>
+      <li>
+        <Link to="/dashboard" onClick={logout}>
+          <i className="fas fa-user"></i>{" "}
+          <span className="hide-sm">Dashboard</span>
+        </Link>
+      </li>
+      <li>
+        <Link to="/" onClick={logout}>
+          <i className="fas fa-sign-out-alt"></i>{" "}
+          <span className="hide-sm">Logout</span>
+        </Link>
+      </li>
     </ul>
   );
   const guestLinks = () => (
