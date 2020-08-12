@@ -1,15 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { addExperience } from "../../actions/profile";
+import { addEducation } from "../../actions/profile";
 import { withRouter, Link } from "react-router-dom";
 import { useState } from "react";
 
-const AddExperience = ({ addExperience, history }) => {
+const AddEducation = ({ addEducation, history }) => {
   const [formData, setFormData] = useState({
-    company: "",
-    title: "",
-    location: "",
+    school: "",
+    degree: "",
+    fieldofstudy: "",
     from: "",
     to: "",
     current: false,
@@ -18,52 +18,60 @@ const AddExperience = ({ addExperience, history }) => {
 
   const [toDateDisabled, toggleToDate] = useState(false);
 
-  const { company, title, location, from, to, current, description } = formData;
+  const {
+    school,
+    degree,
+    fieldofstudy,
+    from,
+    to,
+    current,
+    description,
+  } = formData;
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addExperience(formData, history);
+    addEducation(formData, history);
   };
 
   return (
     <>
-      <h1 className="large text-primary">Add An Experience</h1>
+      <h1 className="large text-primary">Add Your Education</h1>
       <p className="lead">
-        <i className="fas fa-code-branch"></i> Add any developer/programming
-        positions that you have had in the past
+        <i className="fas fa-code-branch"></i> Add any school or bootcamp that
+        you have attended in the past
       </p>
       <small>* = required field</small>
       <form className="form" onSubmit={handleSubmit}>
         <div className="form-group">
           <input
             type="text"
-            placeholder="* Job Title"
+            placeholder="* School or Bootcamp"
             onChange={handleChange}
-            value={title}
-            name="title"
+            value={school}
+            name="school"
             required
           />
         </div>
         <div className="form-group">
           <input
             type="text"
-            placeholder="* Company"
+            placeholder="* Degree"
             onChange={handleChange}
-            value={company}
-            name="company"
+            value={degree}
+            name="degree"
             required
           />
         </div>
         <div className="form-group">
           <input
             type="text"
-            placeholder="Location"
+            placeholder="Field of Study"
             onChange={handleChange}
-            value={location}
-            name="location"
+            value={fieldofstudy}
+            name="fieldofstudy"
           />
         </div>
         <div className="form-group">
@@ -82,7 +90,7 @@ const AddExperience = ({ addExperience, history }) => {
                 toggleToDate(!toDateDisabled);
               }}
             />{" "}
-            Current Job
+            Currently Studying
           </p>
         </div>
         <div className="form-group">
@@ -100,7 +108,7 @@ const AddExperience = ({ addExperience, history }) => {
             name="description"
             cols="30"
             rows="5"
-            placeholder="Job Description"
+            placeholder="Program Description"
             value={description}
             onChange={handleChange}
           ></textarea>
@@ -114,8 +122,8 @@ const AddExperience = ({ addExperience, history }) => {
   );
 };
 
-AddExperience.propTypes = {
-  addExperience: PropTypes.func.isRequired,
+AddEducation.propTypes = {
+  addEducation: PropTypes.func.isRequired,
 };
 
-export default withRouter(connect(null, { addExperience })(AddExperience));
+export default withRouter(connect(null, { addEducation })(AddEducation));
