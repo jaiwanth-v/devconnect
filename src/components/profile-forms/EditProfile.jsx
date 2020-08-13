@@ -65,7 +65,7 @@ const EditProfile = ({
       youtube: loading || !profile.social ? "" : profile.social.youtube,
       instagram: loading || !profile.social ? "" : profile.social.instagram,
     });
-  }, [loading]);
+  }, [getCurrentProfile]);
   return (
     <Fragment>
       <h1 className="large text-primary">Edit Your Profile</h1>
