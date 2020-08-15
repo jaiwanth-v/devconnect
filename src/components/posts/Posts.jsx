@@ -14,18 +14,15 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
   return loading ? (
     <Spinner />
   ) : (
-    <>
-      <h1 className="large text-primary">Posts</h1>
-      <p className="lead">
-        <i className="fas fa-user">Welcome to the community</i>
-      </p>
+    <div>
+      <h1 className="large text-primary text-center">Posts</h1>
       <PostForm />
-      <div className="posts">
+      <div className="d-flex flex-column justify-content-center">
         {posts.map((post) => (
           <PostItem key={post._id} post={post} />
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

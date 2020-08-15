@@ -1,12 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { Grid, Button, AppBar, Toolbar } from "@material-ui/core";
 import "./Navbar.scss";
 import { Link, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { logout } from "../../actions/auth";
+import { DarkModeSwitch } from "react-toggle-dark-mode";
+import {
+  enable as enableDarkMode,
+  disable as disableDarkMode,
+} from "darkreader";
 
-const Navbar2 = ({ auth: { isAuthenticated, loading }, logout }) => {
+const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+  const [isDark, setDark] = useState(false);
+  const toggleDarkMode = () => {
+    !isDark
+      ? enableDarkMode({
+          brightness: 100,
+          contrast: 100,
+          sepia: 10,
+        })
+      : disableDarkMode();
+    setDark(!isDark);
+  };
   const authLinks = () => (
     <>
       <NavLink
@@ -50,7 +66,7 @@ const Navbar2 = ({ auth: { isAuthenticated, loading }, logout }) => {
         style={{ textDecoration: "none" }}
         to="/profiles"
       >
-        <Button color="inherit" className="mainLogo">
+        <Button color="inherit" className="buttonFontSize">
           Discover
         </Button>
       </NavLink>
@@ -78,24 +94,34 @@ const Navbar2 = ({ auth: { isAuthenticated, loading }, logout }) => {
 
   return (
     <nav className="mb-4">
-      <AppBar position="static" color="default" className="AppBar">
+      <AppBar position="static" className={`AppBar`}>
         <Grid item sm={12} xs={12} className="container">
           <Toolbar>
             <Grid className="grow">
               <Link
                 style={{
-                  color: "black",
+                  color: "white",
                   textDecoration: "none",
                 }}
                 to="/"
               >
-                <Button className="mainLogo">
+                <Button className="buttonFontSize">
                   <i className="fas fa-code mr-1"> </i>dev Connect
                 </Button>
               </Link>
             </Grid>
 
-            {!loading && <> {isAuthenticated ? authLinks() : guestLinks()} </>}
+            <DarkModeSwitch
+              className="mr-3"
+              sunColor={""}
+              moonColor={"rgba(255,255,256,1)"}
+              onClick={toggleDarkMode}
+              checked={!isDark}
+              size={window.matchMedia("(max-width: 800px)").matches ? 17 : 20}
+            />
+            <div className="NavLinks d-flex">
+              <> {isAuthenticated ? authLinks() : guestLinks()} </>
+            </div>
           </Toolbar>
         </Grid>
       </AppBar>
@@ -103,7 +129,7 @@ const Navbar2 = ({ auth: { isAuthenticated, loading }, logout }) => {
   );
 };
 
-Navbar2.propTypes = {
+Navbar.propTypes = {
   auth: PropTypes.object.isRequired,
   logout: PropTypes.func.isRequired,
 };
@@ -112,4 +138,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { logout })(Navbar2);
+export default connect(mapStateToProps, { logout })(Navbar);

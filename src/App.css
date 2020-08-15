@@ -266,10 +266,13 @@ button {
 
 /* Landing Page */
 .landing {
-  position: relative;
-  background: url("https://images.unsplash.com/photo-1548092372-0d1bd40894a3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80")
+  position: absolute;
+  background: url("https://image.freepik.com/free-vector/web-developers-team-work-online-startup-group_93633-58.jpg")
     no-repeat center center/cover;
+  z-index: -1;
+  bottom: 0;
   height: 100vh;
+  width: 100%;
 }
 
 .landing-inner {
@@ -398,6 +401,7 @@ button {
   display: grid;
   grid-template-columns: 1fr 4fr;
   grid-gap: 2rem;
+
   align-items: center;
 }
 
@@ -504,6 +508,8 @@ button {
 
   .post {
     grid-template-columns: 1fr;
+    grid-gap: unset;
+    text-align: center;
   }
   .post a,
   .post button {

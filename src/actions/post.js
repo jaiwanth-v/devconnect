@@ -29,7 +29,6 @@ export const getPosts = () => async (dispatch) => {
 export const addLike = (postId) => async (dispatch) => {
   try {
     const res = await axios.put(`/api/posts/like/${postId}`);
-    console.log(res.data);
     dispatch({
       type: UPDATE_LIKES,
       payload: { postId, likes: res.data },
@@ -80,9 +79,7 @@ export const addPost = (formData) => async (dispatch) => {
       },
     };
     const post = JSON.stringify(formData);
-    console.log(post);
     const res = await axios.post("/api/posts", post, config);
-
     dispatch({
       type: ADD_POST,
       payload: res.data,

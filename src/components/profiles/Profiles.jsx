@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import { getProfiles } from "../../actions/profile";
 import { useEffect } from "react";
 import ProfileItem from "./ProfileItem";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { Fade } from "@material-ui/core";
 const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
   useEffect(() => {
@@ -22,7 +21,7 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
         {loading || profiles.length === 0 ? (
           <Spinner />
         ) : (
-          <Fade in={!loading}>
+          <Fade in={profiles.length > 0}>
             <div className="profiles">
               {profiles.length > 0
                 ? profiles.map((profile) => (

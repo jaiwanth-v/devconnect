@@ -10,6 +10,7 @@ import ProfileAbout from "./ProfileAbout";
 import ProfileExperience from "./ProfileExperience";
 import ProfileEducation from "./ProfileEducation";
 import ProfileGithub from "./ProfileGithub";
+import { Fade } from "@material-ui/core";
 
 const Profile = ({
   getProfilebyId,
@@ -28,9 +29,6 @@ const Profile = ({
         <Spinner />
       ) : (
         <>
-          <Link to="/profiles" className="btn btn-light">
-            Back To Profiles
-          </Link>
           {auth.isAuthenticated &&
             !auth.loading &&
             auth.user._id === profile.user._id && (
@@ -38,37 +36,42 @@ const Profile = ({
                 Edit Profile
               </Link>
             )}
-          <div className="profile-grid my-1">
-            <ProfileTop profile={profile} />
-            <ProfileAbout profile={profile} />
-            <div className="profile-exp bg-white p-2">
-              <h2 className="text-primary">Experience</h2>
-              {profile.experience.length > 0 ? (
-                <>
-                  {profile.experience.map((exp) => (
-                    <ProfileExperience key={exp._id} experience={exp} />
-                  ))}
-                </>
-              ) : (
-                <h4>No experience credentials</h4>
+          <Fade in={!loading}>
+            <div className="profile-grid my-1">
+              <ProfileTop profile={profile} />
+              <ProfileAbout profile={profile} />
+              <div className="profile-exp bg-white p-2">
+                <h2 className="text-primary">Experience</h2>
+                {profile.experience.length > 0 ? (
+                  <>
+                    {profile.experience.map((exp) => (
+                      <ProfileExperience key={exp._id} experience={exp} />
+                    ))}
+                  </>
+                ) : (
+                  <h4>No experience credentials</h4>
+                )}
+              </div>
+              <div className="profile-edu bg-white p-2">
+                <h2 className="text-primary">Education</h2>
+                {profile.education.length > 0 ? (
+                  <>
+                    {profile.education.map((edu) => (
+                      <ProfileEducation key={edu._id} education={edu} />
+                    ))}
+                  </>
+                ) : (
+                  <h4>No education credentials</h4>
+                )}
+              </div>
+              {profile.githubusername && (
+                <ProfileGithub githubusername={profile.githubusername} />
               )}
             </div>
-            <div className="profile-edu bg-white p-2">
-              <h2 className="text-primary">Education</h2>
-              {profile.education.length > 0 ? (
-                <>
-                  {profile.education.map((edu) => (
-                    <ProfileEducation key={edu._id} education={edu} />
-                  ))}
-                </>
-              ) : (
-                <h4>No education credentials</h4>
-              )}
-            </div>
-            {profile.githubusername && (
-              <ProfileGithub githubusername={profile.githubusername} />
-            )}
-          </div>
+          </Fade>
+          <Link to="/profiles" className="btn btn-light">
+            Back To Profiles
+          </Link>
         </>
       )}
     </>

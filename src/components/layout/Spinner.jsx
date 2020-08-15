@@ -1,8 +1,7 @@
-import React, { Fragment } from "react";
-import spinner from "./spinner.gif";
+import React from "react";
 import Loader from "react-loader-spinner";
 export default () => (
-  <Fragment>
-    <Loader type="Puff" color="#00bfff" height={100} width={100} />
-  </Fragment>
+  <div className="text-center mt-5 pt-5 ">
+    <Loader type="ThreeDots" color="#00bfff" height={100} width={100} />
+  </div>
 );

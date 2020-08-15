@@ -2,40 +2,60 @@ import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Button } from "@material-ui/core";
+import { Button, Fade } from "@material-ui/core";
 
 const Landing = ({ isAuthenticated }) => {
   if (isAuthenticated) {
     return <Redirect to="/dashboard" />;
   }
   return (
-    <section className="landing">
-      <div className="dark-overlay">
-        <div className="landing-inner">
-          <h1
-            style={{ color: "", fontFamily: "Montserrat" }}
-            className="x-large"
-          >
-            dev Connect
-          </h1>
-          <h4>● Connect ● Learn ● Grow</h4>
-          <p className="lead">
-            Create a developer profile/portfolio, share posts and get help from
-            other developers
-          </p>
-          <div className="buttons">
-            <Link to="/register" className="mr-2">
-              <Button variant="contained" color="primary">
-                Sign up
-              </Button>
-            </Link>
-            <Link to="/login">
-              <Button variant="contained">Login</Button>
-            </Link>
+    <Fade in={true}>
+      <section className="landing">
+        <div className="dark-overlay">
+          <div className="landing-inner">
+            <h1
+              style={{ color: "", fontFamily: "Montserrat" }}
+              className="x-large"
+            >
+              <i className="fas fa-code mr-1"> </i> Dev Connect
+            </h1>
+            <h4 style={{ fontFamily: "PT Sans" }} className="mb-4">
+              ● Connect ● Learn ● Grow
+            </h4>
+            <div className="buttons mb-4">
+              <Link to="/register" className="mr-2">
+                <Button
+                  variant="contained"
+                  style={{
+                    backgroundColor: "rgb(0,100,255)",
+                    color: "#fff",
+                    borderRadius: "8%",
+                  }}
+                >
+                  Sign up
+                </Button>
+              </Link>
+              <Link to="/login">
+                <Button
+                  style={{
+                    backgroundColor: "rgba(255,100,0,0.9)",
+                    color: "white",
+                    borderRadius: "8%",
+                  }}
+                  variant="contained"
+                >
+                  Login
+                </Button>
+              </Link>
+            </div>
+            <h5 style={{ fontFamily: "PT Sans" }}>
+              Sign in to share posts, create profile and get help from other
+              developers
+            </h5>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </Fade>
   );
 };
 
