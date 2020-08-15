@@ -22,7 +22,7 @@ const Dashboard = ({
   return loading && profile == null ? (
     <Spinner />
   ) : (
-    <Fragment>
+    <div className="text-center m-4">
       <h1 className="large text-primary">Dashboard</h1>
       <p className="lead">
         <i className="fas fa-user"></i> Welcome {user && user.name}
@@ -51,7 +51,7 @@ const Dashboard = ({
           Delete My Account
         </button>
       </div>
-    </Fragment>
+    </div>
   );
 };
 

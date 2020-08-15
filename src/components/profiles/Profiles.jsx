@@ -5,30 +5,34 @@ import { connect } from "react-redux";
 import { getProfiles } from "../../actions/profile";
 import { useEffect } from "react";
 import ProfileItem from "./ProfileItem";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { Fade } from "@material-ui/core";
 const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
   useEffect(() => {
     getProfiles();
   }, [getProfiles]);
   return (
     <Fragment>
-      {loading ? (
-        <Spinner />
-      ) : (
-        <>
-          <h1 className="large text-primary">Developers</h1>
-          <p className="lead">
-            <i className="fab fa-connectdevelop"></i> Browse and connect with
-            developers
-          </p>
-          <div className="profiles">
-            {profiles.length > 0
-              ? profiles.map((profile) => (
-                  <ProfileItem key={profile._id} profile={profile} />
-                ))
-              : null}
-          </div>
-        </>
-      )}
+      <div>
+        <h1 className="large  text-center text-primary">Developers</h1>
+        <p className="lead text-center ">
+          <i className="fab fa-connectdevelop"></i> Browse and connect with
+          developers
+        </p>
+        {loading || profiles.length === 0 ? (
+          <Spinner />
+        ) : (
+          <Fade in={!loading}>
+            <div className="profiles">
+              {profiles.length > 0
+                ? profiles.map((profile) => (
+                    <ProfileItem key={profile._id} profile={profile} />
+                  ))
+                : null}
+            </div>
+          </Fade>
+        )}
+      </div>
     </Fragment>
   );
 };

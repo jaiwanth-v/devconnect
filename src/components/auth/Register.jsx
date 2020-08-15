@@ -1,10 +1,13 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { setAlert } from "../../actions/alert";
 import PropTypes from "prop-types";
 import { register } from "../../actions/auth";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import { Button, Fade } from "@material-ui/core";
+
 const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     name: "",
@@ -14,15 +17,18 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   });
 
   const { name, email, password, password2 } = formData;
+
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  ValidatorForm.addValidationRule("isPasswordMatch", (value) => {
+    if (value !== password) return false;
+    return true;
+  });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password !== password2)
-      setAlert("Passwords dont match", "danger", 1000);
-    else {
-      register({ name, email, password });
-    }
+    register({ name, email, password });
   };
 
   if (isAuthenticated) {
@@ -30,69 +36,103 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   }
 
   return (
-    <Fragment>
-      <h1 className="large text-primary">Sign Up</h1>
-      <p className="lead">
-        <i className="fas fa-user"></i> Create Your Account
-      </p>
-      <form className="form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => onChange(e)}
-            placeholder="Name"
-            name="name"
-            required
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="email"
-            required
-            placeholder="Email Address"
-            value={email}
-            onChange={(e) => onChange(e)}
-            name="email"
-          />
-          <small className="form-text">
-            This site uses Gravatar so if you want a profile image, use a
-            Gravatar email
-          </small>
-        </div>
-        <div className="form-group">
-          <input
-            value={password}
-            onChange={(e) => onChange(e)}
-            type="password"
-            placeholder="Password"
-            name="password"
-            minLength="6"
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="password"
-            onChange={(e) => onChange(e)}
-            value={password2}
-            placeholder="Confirm Password"
-            name="password2"
-            minLength="6"
-          />
-        </div>
-        <input type="submit" className="btn btn-primary" value="Register" />
-      </form>
-      <p className="my-1">
-        Already have an account? <Link to="/login">Sign In</Link>
-      </p>
-    </Fragment>
+    <Fade in={true}>
+      <div
+        style={{
+          marginTop: "10vh",
+          width: "400px",
+          height: "600px",
+          borderRadius: "10px",
+        }}
+        className="container text-center shadow pt-4 p-2 mb-5 bg-white "
+      >
+        <h1 className="large text-primary mb-4">Sign Up</h1>
+
+        <ValidatorForm onSubmit={handleSubmit}>
+          <div className="form-group">
+            <TextValidator
+              label="Name"
+              style={{ width: "18rem" }}
+              onChange={onChange}
+              name="name"
+              variant="outlined"
+              type="text"
+              validators={["required"]}
+              errorMessages={["This field is required"]}
+              value={name}
+            />
+          </div>
+          <div className="form-group">
+            <TextValidator
+              name="email"
+              style={{ width: "18rem" }}
+              validators={["required", "isEmail"]}
+              onChange={onChange}
+              value={email}
+              errorMessages={["This field is required", "Email is invalid"]}
+              label="Email Address"
+              variant="outlined"
+            />
+          </div>
+          <div className="form-group">
+            <TextValidator
+              label="Password"
+              style={{ width: "18rem" }}
+              onChange={onChange}
+              name="password"
+              variant="outlined"
+              type="password"
+              validators={["required"]}
+              errorMessages={["This field is required"]}
+              value={password}
+              minLength="6"
+            />
+          </div>
+          <div className="form-group">
+            <TextValidator
+              style={{ width: "18rem" }}
+              label="Confirm Password"
+              onChange={onChange}
+              name="password2"
+              type="password"
+              validators={["isPasswordMatch", "required"]}
+              errorMessages={[
+                "Passwords don't match",
+                "this field is required",
+              ]}
+              value={password2}
+              variant="outlined"
+            />
+          </div>
+          <Button
+            type="submit"
+            variant="contained"
+            style={{ backgroundColor: "rgb(26,115,232)" }}
+            color="primary"
+            className="m-3 w-50"
+          >
+            Register
+          </Button>
+        </ValidatorForm>
+        <p className="my-1">
+          Already have an account?{" "}
+          <Link className="text-primary" to="/login">
+            Sign In
+          </Link>
+        </p>
+        <small>
+          This website uses Gravatar so if you want <br /> a profile image, use
+          a Gravatar email
+        </small>
+      </div>
+    </Fade>
   );
 };
 
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired,
+  isAuthenticated: PropTypes.bool,
 };
 
 const mapStateToProps = (state) => ({

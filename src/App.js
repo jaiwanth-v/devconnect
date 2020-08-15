@@ -1,6 +1,5 @@
 import React, { Fragment, useEffect } from "react";
 import "./App.css";
-import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Login from "./components/auth/Login";
@@ -20,6 +19,7 @@ import Profiles from "./components/profiles/Profiles";
 import Profile from "./components/profile/Profile";
 import Posts from "./components/posts/Posts";
 import Post from "./components/post/Post";
+import Navbar from "./components/layout/Navbar";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);

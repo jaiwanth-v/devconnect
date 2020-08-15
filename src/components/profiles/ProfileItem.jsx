@@ -9,7 +9,7 @@ const ProfileItem = ({
     user && (
       <div className="profile bg-light">
         <img className="round-img" src={user.avatar} alt="" />
-        <div>
+        <div className="text-center">
           <h2>{user.name}</h2>
           <p>
             {status} {company && <span>at {company}</span>}{" "}

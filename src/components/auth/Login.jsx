@@ -3,6 +3,8 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { login } from "../../actions/auth";
+import { Button, Fade } from "@material-ui/core";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
 const Login = ({ login, isAuthenticated }) => {
   const [formData, setFormData] = useState({
@@ -23,37 +25,60 @@ const Login = ({ login, isAuthenticated }) => {
   }
 
   return (
-    <>
-      <h1 className="large text-primary">Sign In</h1>
-      <p className="lead">
-        <i className="fas fa-user"></i> Sign into Your Account
-      </p>
-      <form onSubmit={handleSubmit} className="form">
-        <div className="form-group">
-          <input
-            value={email}
-            onChange={(e) => onChange(e)}
-            type="email"
-            placeholder="Email Address"
-            name="email"
-            required
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="password"
-            onChange={(e) => onChange(e)}
-            value={password}
-            placeholder="Password"
-            name="password"
-          />
-        </div>
-        <input type="submit" className="btn btn-primary" value="Login" />
-      </form>
-      <p className="my-1">
-        Don't have an account? <Link to="/register">Sign Up</Link>
-      </p>
-    </>
+    <Fade in={true}>
+      <div
+        style={{
+          marginTop: "15vh",
+          width: "400px",
+          height: "400px",
+          borderRadius: "10px",
+        }}
+        className="container text-center shadow pt-4 p-2 mb-5 bg-white "
+      >
+        <h2 className="large text-primary mb-4 ">Sign In</h2>
+
+        <ValidatorForm onSubmit={handleSubmit}>
+          <div className="form-group">
+            <TextValidator
+              name="email"
+              validators={["required", "isEmail"]}
+              onChange={onChange}
+              value={email}
+              errorMessages={["This field is required", "Email is invalid"]}
+              label="Email Address"
+              variant="outlined"
+            />
+          </div>
+          <div className="form-group">
+            <TextValidator
+              label="Password"
+              onChange={onChange}
+              name="password"
+              variant="outlined"
+              type="password"
+              validators={["required"]}
+              errorMessages={["This field is required"]}
+              value={password}
+            />
+          </div>
+          <Button
+            type="submit"
+            variant="contained"
+            style={{ backgroundColor: "rgb(26,115,232)" }}
+            color="primary"
+            className="m-3 w-50"
+          >
+            Login
+          </Button>
+        </ValidatorForm>
+        <p className="my-1 ">
+          Don't have an account?{" "}
+          <Link className="text-primary" to="/register">
+            Sign Up
+          </Link>
+        </p>
+      </div>
+    </Fade>
   );
 };
 

@@ -1,55 +1,109 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Grid, Button, AppBar, Toolbar } from "@material-ui/core";
+import "./Navbar.scss";
+import { Link, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { logout } from "../../actions/auth";
 
-const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+const Navbar2 = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = () => (
-    <ul>
-      <li>
-        <Link to="/profiles">Developers</Link>
-        <Link to="/posts">Posts</Link>
-
-        <Link to="/dashboard">
-          <i className="fas fa-user"></i>
-          <span className="hide-sm">Dashboard</span>
-        </Link>
-      </li>
-      <li>
-        <Link to="/" onClick={logout}>
-          <i className="fas fa-sign-out-alt"></i>
-          <span className="hide-sm">Logout</span>
-        </Link>
-      </li>
-    </ul>
+    <>
+      <NavLink
+        activeClassName="loginButton"
+        style={{ textDecoration: "none" }}
+        to="/profiles"
+      >
+        <Button color="inherit" className="buttonFontSize ">
+          Discover
+        </Button>
+      </NavLink>
+      <NavLink
+        activeClassName="loginButton"
+        style={{ textDecoration: "none" }}
+        to="/posts"
+      >
+        <Button color="inherit" className="buttonFontSize ">
+          Posts
+        </Button>
+      </NavLink>
+      <NavLink
+        activeClassName="loginButton"
+        style={{ textDecoration: "none" }}
+        to="/dashboard"
+      >
+        <Button color="inherit" className="buttonFontSize ">
+          Dashboard
+        </Button>
+      </NavLink>
+      <NavLink style={{ textDecoration: "none" }} to="/" onClick={logout}>
+        <Button color="inherit" className="buttonFontSize ">
+          Logout
+        </Button>
+      </NavLink>
+    </>
   );
   const guestLinks = () => (
-    <ul>
-      <li>
-        <Link to="/profiles">Developers</Link>
-      </li>
-      <li>
-        <Link to="/register">Register</Link>
-      </li>
-      <li>
-        <Link to="/login">Login</Link>
-      </li>
-    </ul>
+    <>
+      <NavLink
+        activeClassName="loginButton"
+        style={{ textDecoration: "none" }}
+        to="/profiles"
+      >
+        <Button color="inherit" className="mainLogo">
+          Discover
+        </Button>
+      </NavLink>
+
+      <NavLink
+        activeClassName="loginButton"
+        style={{ textDecoration: "none" }}
+        to="/login"
+      >
+        <Button color="inherit" className="buttonFontSize">
+          Login
+        </Button>
+      </NavLink>
+      <NavLink
+        activeClassName="loginButton"
+        style={{ textDecoration: "none" }}
+        to="/register"
+      >
+        <Button color="inherit" className="buttonFontSize ">
+          Register
+        </Button>
+      </NavLink>
+    </>
   );
+
   return (
-    <nav className="navbar bg-dark">
-      <h1>
-        <Link to="/">
-          <i className="fas fa-code"></i> DevConnector
-        </Link>
-      </h1>
-      {!loading && <> {isAuthenticated ? authLinks() : guestLinks()} </>}
+    <nav className="mb-4">
+      <AppBar position="static" color="default" className="AppBar">
+        <Grid item sm={12} xs={12} className="container">
+          <Toolbar>
+            <Grid className="grow">
+              <Link
+                style={{
+                  color: "black",
+                  textDecoration: "none",
+                }}
+                to="/"
+              >
+                <Button className="mainLogo">
+                  <i className="fas fa-code mr-1"> </i>dev Connect
+                </Button>
+              </Link>
+            </Grid>
+
+            {!loading && <> {isAuthenticated ? authLinks() : guestLinks()} </>}
+          </Toolbar>
+        </Grid>
+      </AppBar>
     </nav>
   );
 };
 
-Navbar.propTypes = {
+Navbar2.propTypes = {
   auth: PropTypes.object.isRequired,
   logout: PropTypes.func.isRequired,
 };
@@ -58,4 +112,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { logout })(Navbar);
+export default connect(mapStateToProps, { logout })(Navbar2);
