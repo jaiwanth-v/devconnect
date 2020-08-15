@@ -8,7 +8,7 @@ import { Link, withRouter } from "react-router-dom";
 import DashboardActions from "./DashboardActions";
 import Experience from "./Experience";
 import Education from "./Education";
-import { Fade } from "@material-ui/core";
+import { Fade, Button } from "@material-ui/core";
 
 const Dashboard = ({
   history,
@@ -23,12 +23,13 @@ const Dashboard = ({
   return loading && profile == null && user === null ? (
     <Spinner />
   ) : (
-    <Fade in={user}>
+    <Fade in={!loading}>
       <div className="text-center m-4">
         <h1 className="large text-primary">Dashboard</h1>
         <p className="lead">
           <i className="fas fa-user"></i> Welcome {user && user.name}
         </p>
+
         {profile != null ? (
           <Fragment>
             <DashboardActions />
@@ -36,22 +37,24 @@ const Dashboard = ({
         ) : (
           <Fragment>
             <p>You have not yet setup a profile, please add some info</p>
-            <Link to="/create-profile" className="btn btn-primary my-1">
-              Create profile
+            <Link to="/create-profile" className=" my-1">
+              <Button color="primary" variant="contained">
+                Create profile
+              </Button>
             </Link>
           </Fragment>
         )}
         {profile && <Experience experience={"" || profile.experience} />}
         {profile && <Education education={"" || profile.education} />}
 
-        <div className="my-2">
-          <button
+        <div className="mt-4">
+          <Button
+            style={{ backgroundColor: "rgb(230,0,1)", color: "white" }}
+            variant="contained"
             onClick={() => deleteAccount(history)}
-            className="btn btn-danger"
           >
-            <i className="fas fa-user-minus"></i>
             Delete My Account
-          </button>
+          </Button>
         </div>
       </div>
     </Fade>

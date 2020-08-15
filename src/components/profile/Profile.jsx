@@ -28,14 +28,7 @@ const Profile = ({
       {profile === null || loading ? (
         <Spinner />
       ) : (
-        <>
-          {auth.isAuthenticated &&
-            !auth.loading &&
-            auth.user._id === profile.user._id && (
-              <Link to="/edit-profile" className="btn btn-dark">
-                Edit Profile
-              </Link>
-            )}
+        <div>
           <Fade in={!loading}>
             <div className="profile-grid my-1">
               <ProfileTop profile={profile} />
@@ -69,10 +62,19 @@ const Profile = ({
               )}
             </div>
           </Fade>
-          <Link to="/profiles" className="btn btn-light">
-            Back To Profiles
-          </Link>
-        </>
+          <div className="text-center">
+            {auth.isAuthenticated &&
+              !auth.loading &&
+              auth.user._id === profile.user._id && (
+                <Link to="/edit-profile" className="btn btn-dark">
+                  Edit Profile
+                </Link>
+              )}
+            <Link to="/profiles" className="btn btn-light">
+              Back To Profiles
+            </Link>
+          </div>
+        </div>
       )}
     </>
   );

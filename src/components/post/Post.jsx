@@ -17,12 +17,16 @@ const Post = ({ getPost, post: { post, loading }, match }) => {
     <Spinner />
   ) : (
     <>
-      <Link to="/posts" className=".btn">
-        Back To Posts
-      </Link>
+      <div className="text-center">
+        <Link to="/posts" className="btn">
+          Back To Posts
+        </Link>
+      </div>
       <PostItem post={post} showActions={false} />
       <CommentForm postId={post._id} />
-      <div className="comments">
+      <div className="comments ml-md-5">
+        {post.comments.length ? <h2>Comments: </h2> : null}
+        <br />
         {post.comments.map((comment) => (
           <CommentItem key={comment._id} comment={comment} postId={post._id} />
         ))}

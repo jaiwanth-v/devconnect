@@ -1,9 +1,15 @@
-import React, { useState, Fragment } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 import { createProfile, getCurrentProfile } from "../../actions/profile";
 import { useEffect } from "react";
+import { Button, MenuItem } from "@material-ui/core";
+import {
+  TextValidator,
+  SelectValidator,
+  ValidatorForm,
+} from "react-material-ui-form-validator";
 
 const EditProfile = ({
   profile: { profile, loading },
@@ -67,33 +73,45 @@ const EditProfile = ({
     });
   }, [getCurrentProfile]);
   return (
-    <Fragment>
+    <>
       <h1 className="large text-primary">Edit Your Profile</h1>
       <p className="lead">
-        <i className="fas fa-user"></i> Let's get some information to make your
-        profile stand out
+        Let's get some information to make your profile stand out
       </p>
-      <small>* = required field</small>
-      <form className="form" onSubmit={handleSubmit}>
+      <ValidatorForm onSubmit={handleSubmit}>
         <div className="form-group">
-          <select name="status" value={status} onChange={handleChange}>
-            <option value="0">* Select Professional Status</option>
-            <option value="Developer">Developer</option>
-            <option value="Junior Developer">Junior Developer</option>
-            <option value="Senior Developer">Senior Developer</option>
-            <option value="Manager">Manager</option>
-            <option value="Student or Learning">Student or Learning</option>
-            <option value="Instructor">Instructor or Teacher</option>
-            <option value="Intern">Intern</option>
-            <option value="Other">Other</option>
-          </select>
+          <SelectValidator
+            validators={["required"]}
+            errorMessages={["This field is required"]}
+            fullWidth
+            label="* Status"
+            placeholder="* Status"
+            name="status"
+            labelId="selectlabel"
+            value={status}
+            variant="outlined"
+            onChange={handleChange}
+            defaultValue={0}
+          >
+            <MenuItem value="Developer">Developer</MenuItem>
+            <MenuItem value="Junior Developer">Junior Developer</MenuItem>
+            <MenuItem value="Senior Developer">Senior Developer</MenuItem>
+            <MenuItem value="Manager">Manager</MenuItem>
+            <MenuItem value="Student or Learning">Student or Learning</MenuItem>
+            <MenuItem value="Instructor">Instructor or Teacher</MenuItem>
+            <MenuItem value="Intern">Intern</MenuItem>
+            <MenuItem value="Other">Other</MenuItem>
+          </SelectValidator>
           <small className="form-text">
             Give us an idea of where you are at in your career
           </small>
         </div>
         <div className="form-group">
-          <input
+          <TextValidator
             type="text"
+            variant="outlined"
+            label="Company"
+            fullWidth
             placeholder="Company"
             value={company}
             name="company"
@@ -104,7 +122,10 @@ const EditProfile = ({
           </small>
         </div>
         <div className="form-group">
-          <input
+          <TextValidator
+            fullWidth
+            label="Website"
+            variant="outlined"
             type="text"
             placeholder="Website"
             value={website}
@@ -116,7 +137,10 @@ const EditProfile = ({
           </small>
         </div>
         <div className="form-group">
-          <input
+          <TextValidator
+            fullWidth
+            label="Location"
+            variant="outlined"
             type="text"
             placeholder="Location"
             name="location"
@@ -124,13 +148,18 @@ const EditProfile = ({
             value={location}
           />
           <small className="form-text">
-            City & state suggested (eg. Boston, MA)
+            City & state suggested (eg. Hyderabad, TS)
           </small>
         </div>
         <div className="form-group">
-          <input
+          <TextValidator
+            fullWidth
+            label="* Skills"
+            validators={["required"]}
+            errorMessages={["This field is required"]}
+            variant="outlined"
             type="text"
-            placeholder="* Skills"
+            placeholder="Skills"
             name="skills"
             value={skills}
             onChange={handleChange}
@@ -140,7 +169,10 @@ const EditProfile = ({
           </small>
         </div>
         <div className="form-group">
-          <input
+          <TextValidator
+            fullWidth
+            label="Github Username"
+            variant="outlined"
             type="text"
             value={githubusername}
             onChange={handleChange}
@@ -153,31 +185,39 @@ const EditProfile = ({
           </small>
         </div>
         <div className="form-group">
-          <textarea
+          <TextValidator
+            multiline
+            rows={3}
+            label="Bio"
+            fullWidth
+            variant="outlined"
             placeholder="A short bio of yourself"
             name="bio"
             onChange={handleChange}
             value={bio}
-          ></textarea>
+          ></TextValidator>
+
           <small className="form-text">Tell us a little about yourself</small>
         </div>
 
         <div className="my-2">
-          <button
+          <Button
             onClick={() => toggleSocialInputs(!displaySocial)}
-            type="button"
-            className="btn btn-light"
+            variant="contained"
           >
             Add Social Network Links
-          </button>
-          <span>Optional</span>
+          </Button>
+          <span> (Optional) </span>
         </div>
 
         {displaySocial && (
           <>
             <div className="form-group social-input">
               <i className="fab fa-twitter fa-2x"></i>
-              <input
+              <TextValidator
+                fullWidth
+                label="Twitter"
+                variant="outlined"
                 type="text"
                 placeholder="Twitter URL"
                 value={twitter}
@@ -187,8 +227,11 @@ const EditProfile = ({
             </div>
             <div className="form-group social-input">
               <i className="fab fa-facebook fa-2x"></i>
-              <input
+              <TextValidator
+                fullWidth
+                variant="outlined"
                 type="text"
+                label="Facebook"
                 placeholder="Facebook URL"
                 value={facebook}
                 onChange={handleChange}
@@ -197,8 +240,11 @@ const EditProfile = ({
             </div>
             <div className="form-group social-input">
               <i className="fab fa-youtube fa-2x"></i>
-              <input
+              <TextValidator
+                fullWidth
+                variant="outlined"
                 type="text"
+                label="YouTube"
                 placeholder="YouTube URL"
                 value={youtube}
                 onChange={handleChange}
@@ -207,7 +253,10 @@ const EditProfile = ({
             </div>
             <div className="form-group social-input">
               <i className="fab fa-linkedin fa-2x"></i>
-              <input
+              <TextValidator
+                fullWidth
+                label="LinkedIn"
+                variant="outlined"
                 type="text"
                 placeholder="Linkedin URL"
                 value={linkedin}
@@ -217,8 +266,11 @@ const EditProfile = ({
             </div>
             <div className="form-group social-input">
               <i className="fab fa-instagram fa-2x"></i>
-              <input
+              <TextValidator
+                fullWidth
+                variant="outlined"
                 type="text"
+                label="Instagram"
                 placeholder="Instagram URL"
                 value={instagram}
                 onChange={handleChange}
@@ -228,12 +280,21 @@ const EditProfile = ({
           </>
         )}
 
-        <input type="submit" className="btn btn-primary my-1" />
-        <Link className="btn btn-light my-1" to="/dashboard">
-          Go Back
+        <Button
+          type="submit"
+          variant="outlined"
+          color="primary"
+          className="btn my-1"
+        >
+          Submit
+        </Button>
+        <Link className=" ml-2 my-1" to="/dashboard">
+          <Button variant="outlined" color="primary" className="btn my-1">
+            Go Back
+          </Button>
         </Link>
-      </form>
-    </Fragment>
+      </ValidatorForm>
+    </>
   );
 };
 

@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
 import { deleteComment } from "../../actions/post";
+import { Button } from "@material-ui/core";
 
 const CommentItem = ({
   postId,
@@ -20,19 +21,23 @@ const CommentItem = ({
         </Link>
       </div>
       <div>
-        <p className="my-1">{text}</p>
-        <p className="post-date">
-          Posted <Moment fromNow>{date}</Moment>
-        </p>
-        {!auth.loading && user === auth.user._id && (
-          <button
-            onClick={() => deleteComment(postId, _id)}
-            type="button"
-            className="btn btn-danger"
-          >
-            <i className="fas fa-times"></i>
-          </button>
-        )}
+        <div className="ml-md-4">
+          <p className="my-1">{text}</p>
+          <p className="post-date">
+            Posted <Moment fromNow>{date}</Moment>
+          </p>
+        </div>
+        <div>
+          {!auth.loading && user === auth.user._id && (
+            <Button
+              onClick={() => deleteComment(postId, _id)}
+              type="button"
+              className="btn "
+            >
+              <i className="fas fa-trash"></i>
+            </Button>
+          )}
+        </div>
       </div>
     </div>
   );

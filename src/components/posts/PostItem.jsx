@@ -4,6 +4,7 @@ import Moment from "react-moment";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { addLike, removeLike, deletePost } from "../../actions/post";
+import { Button } from "@material-ui/core";
 
 const PostItem = ({
   addLike,
@@ -14,8 +15,8 @@ const PostItem = ({
   post: { _id, text, name, avatar, user, likes, comments, date },
 }) => {
   return (
-    <div className="post bg-white mb-4 my-1">
-      <div style={{ height: "130px" }}>
+    <div className="post shadow-sm rounded bg-white mb-4 my-1">
+      <div style={{ height: "140px" }}>
         <img
           className="round-img ml-1"
           style={{ height: "100px", width: "100px" }}
@@ -27,43 +28,45 @@ const PostItem = ({
         </Link>
       </div>
       <div>
-        <p className="my-1">{text}</p>
-        <p className="post-date">
-          Posted on <Moment format="YYYY/MM/DD">{date}</Moment>{" "}
-        </p>
+        <div className="ml-md-3">
+          <p className="my-1">{text}</p>
+          <p className="post-date">
+            Posted <Moment fromNow>{date}</Moment>{" "}
+          </p>
+        </div>
         {showActions && (
-          <>
-            <button
+          <div className="d-flex">
+            <Button
               onClick={(e) => addLike(_id)}
-              type="button"
+              type="Button"
               className="btn btn-light"
             >
               <i className="fas fa-thumbs-up"></i>
-              {likes.length > 0 && <span> {likes.length} </span>}
-            </button>
-            <button
+              {likes.length > 0 && <span className="ml-1">{likes.length}</span>}
+            </Button>
+            <Button
               onClick={(e) => removeLike(_id)}
-              type="button"
-              className="btn btn-light"
+              type="Button"
+              className="btn btn-light mr-2"
             >
               <i className="fas fa-thumbs-down"></i>
-            </button>
-            <Link to={`/posts/${_id}`} className="btn btn-primary">
-              Discussion{" "}
-              {comments.length > 0 && (
-                <span className="comment-count"> {comments.length} </span>
-              )}
+            </Button>
+            <Link to={`/posts/${_id}`}>
+              <Button className="btn btn-light">
+                Discussion{" "}
+                {comments.length > 0 && <span>({comments.length})</span>}
+              </Button>
             </Link>
             {!auth.loading && user === auth.user._id && (
-              <button
+              <Button
                 onClick={() => deletePost(_id)}
-                type="button"
-                className="btn btn-danger"
+                type="Button"
+                className="btn "
               >
-                <i className="fas fa-times"></i>
-              </button>
+                <i className="fas fa-trash"></i>
+              </Button>
             )}
-          </>
+          </div>
         )}
       </div>
     </div>

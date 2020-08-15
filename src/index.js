@@ -7,10 +7,10 @@ import { BrowserRouter } from "react-router-dom";
 import AlertTemplate from "react-alert-template-basic";
 import { transitions, positions, Provider as AlertProvider } from "react-alert";
 const options = {
-  timeout: 2000,
+  timeout: 1000,
   position: positions.BOTTOM_CENTER,
   transitions: transitions.FADE,
-  offset: "200px",
+  offset: "100px",
 };
 
 ReactDOM.render(

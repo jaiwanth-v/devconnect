@@ -9,7 +9,7 @@ import { Button } from "@material-ui/core";
 const PostForm = ({ addPost, user: { name, avatar } }) => {
   const [text, setText] = useState("");
   return (
-    <div className="post mb-5 ">
+    <div className="post shadow-sm rounded mb-5 ">
       <div>
         <img
           style={{ height: "100px", width: "100px" }}
@@ -22,7 +22,7 @@ const PostForm = ({ addPost, user: { name, avatar } }) => {
 
       <div className="d-flex flex-column">
         <ValidatorForm
-          className="m-3  mt-5"
+          className="m-3 mr-md-3 mt-5"
           onSubmit={(e) => {
             e.preventDefault();
             addPost({ text });
@@ -34,6 +34,8 @@ const PostForm = ({ addPost, user: { name, avatar } }) => {
             multiline
             rows={4}
             fullWidth
+            validators={["required"]}
+            errorMessages={["The post cannot be empty"]}
             variant="outlined"
             label="Create a post"
             value={text}

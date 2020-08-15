@@ -15,7 +15,7 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
     <Spinner />
   ) : (
     <div>
-      <h1 className="large text-primary text-center">Posts</h1>
+      <h1 className="large text-primary text-center ml-md-5">Posts</h1>
       <PostForm />
       <div className="d-flex flex-column justify-content-center">
         {posts.map((post) => (
