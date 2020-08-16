@@ -146,6 +146,7 @@ const AddExperience = ({ addExperience, history }) => {
             Go Back
           </Link>
         </ValidatorForm>
+        <small className="my-2">(Note: You can't edit this later)</small>
       </>
     </Fade>
   );

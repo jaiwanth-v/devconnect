@@ -1,4 +1,3 @@
-/* Global Styles */
 :root {
   --primary-color: #17a2b8;
   --dark-color: #343a40;
@@ -191,7 +190,6 @@ img {
   margin-bottom: 1rem;
 }
 
-/* Profile Page */
 .profile-grid {
   display: grid;
   grid-template-areas:
@@ -322,19 +320,41 @@ img {
 @media (max-width: 700px) {
   .container {
     margin-top: 8rem;
+    padding: 0 1rem;
+  }
+  .skills {
+    flex-direction: row !important;
+    flex-wrap: wrap;
+  }
+  #root > nav > header > div > div,
+  #root > nav > header > div,
+  #root > nav > header > div > div > div.MuiGrid-root.grow {
+    padding: unset;
+  }
+  #root > nav > header > div > div > div.NavLinks.d-flex {
+    margin-right: 1rem;
+    justify-content: flex-end;
+  }
+  #root > nav > header > div > div > svg {
+    font-size: 2rem;
+    margin-left: 2.5rem !important;
+    width: 2rem !important;
+    height: 1.5rem !important;
+  }
+  #root > nav > header > div > div > svg {
+    margin-left: 0rem;
   }
 
   .hide-sm {
     display: none;
   }
 
-  /* Text Styles */
   .x-large {
     font-size: 4rem;
   }
 
   .large {
-    font-size: 3rem;
+    font-size: 2rem !important;
   }
 
   .lead {

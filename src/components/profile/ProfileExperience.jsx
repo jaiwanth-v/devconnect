@@ -16,9 +16,11 @@ const ProfileExperience = ({
         <strong>Position: </strong>
         {title}
       </p>
-      <p>
-        <strong>Description: </strong> {description}
-      </p>
+      {description ? (
+        <p>
+          <strong>Description: </strong> {description}
+        </p>
+      ) : null}
     </div>
   );
 };

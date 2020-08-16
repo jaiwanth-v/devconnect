@@ -1,0 +1,49 @@
+.row {
+  flex-grow: 1;
+}
+.grow {
+  flex-grow: 1;
+}
+
+.container {
+  width: 1170;
+  margin: auto;
+}
+.buttonFontSize {
+  font-size: 15px !important;
+  color: #ebebeb !important;
+}
+
+.NavLinks {
+  display: block;
+  @media screen and (max-width: 800px) {
+    flex-wrap: wrap;
+  }
+}
+
+.AppBar {
+  background-color: rgba(31, 30, 30, 0.877) !important;
+  background-size: cover;
+}
+
+.MuiGrid-root {
+  padding: 4px 16px;
+}
+.mainLogo {
+  justify-content: left !important;
+  &:hover {
+    background: transparent !important;
+  }
+}
+
+.loginButton {
+  background: #1a73e8 !important;
+  color: #fff !important;
+  border-radius: 20px !important;
+  padding: 0px 10px !important;
+
+  &:hover {
+    background: blue;
+    box-shadow: 0px 2px 10px #888888;
+  }
+}

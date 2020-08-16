@@ -68,7 +68,7 @@ const CreateProfile = ({ history, createProfile }) => {
             onChange={handleChange}
             defaultValue={0}
           >
-            <MenuItem value="Developer">Developer</MenuItem>
+            <MenuItem value="Web Developer">Web Developer</MenuItem>
             <MenuItem value="Junior Developer">Junior Developer</MenuItem>
             <MenuItem value="Senior Developer">Senior Developer</MenuItem>
             <MenuItem value="Manager">Manager</MenuItem>

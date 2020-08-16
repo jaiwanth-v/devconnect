@@ -20,10 +20,10 @@ const ProfileTop = ({
       <h1 className="large" style={{ color: "#fff" }}>
         {name}
       </h1>
-      <p className="lead">
+      <p className="lead" style={{ color: "#fff" }}>
         {status} {company && <span>at {company} </span>}
       </p>
-      <p> {location && <span>{location}</span>} </p>
+      <p style={{ color: "#fff" }}> {location && <span>{location}</span>} </p>
       <div className="icons my-1">
         {website && (
           <a

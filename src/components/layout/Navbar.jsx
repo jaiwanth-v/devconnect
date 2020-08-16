@@ -9,11 +9,14 @@ import { DarkModeSwitch } from "react-toggle-dark-mode";
 import {
   enable as enableDarkMode,
   disable as disableDarkMode,
+  setFetchMethod,
 } from "darkreader";
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const [isDark, setDark] = useState(false);
   const toggleDarkMode = () => {
+    setFetchMethod(window.fetch);
+
     !isDark
       ? enableDarkMode({
           brightness: 100,

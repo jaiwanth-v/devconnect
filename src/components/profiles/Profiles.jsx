@@ -24,9 +24,11 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
           <Fade in={profiles.length > 0}>
             <div className="profiles">
               {profiles.length > 0
-                ? profiles.map((profile) => (
-                    <ProfileItem key={profile._id} profile={profile} />
-                  ))
+                ? [...profiles]
+                    .reverse()
+                    .map((profile) => (
+                      <ProfileItem key={profile._id} profile={profile} />
+                    ))
                 : null}
             </div>
           </Fade>

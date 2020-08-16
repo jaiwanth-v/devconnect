@@ -130,12 +130,11 @@ const AddEducation = ({ addEducation, history }) => {
                 shrink: true,
               }}
               fullWidth
-              defaultValue="2017-05-24"
               variant="outlined"
               onChange={handleChange}
               value={to}
               name="to"
-              disabled={toDateDisabled ? "disabled" : ""}
+              disabled={toDateDisabled ? true : false}
             />
           </div>
           <div className="form-group">
@@ -156,6 +155,7 @@ const AddEducation = ({ addEducation, history }) => {
             Go Back
           </Link>
         </ValidatorForm>
+        <small className="my-2">(Note: You can't edit this later)</small>
       </>
     </Fade>
   );
