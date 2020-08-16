@@ -13,7 +13,9 @@ import {
 
 export const getPosts = () => async (dispatch) => {
   try {
-    const res = await axios.get("/api/posts");
+    const res = await axios.get(
+      "https://backend-devconnect.herokuapp.com/api/posts"
+    );
     dispatch({
       type: GET_POSTS,
       payload: res.data,
@@ -28,7 +30,9 @@ export const getPosts = () => async (dispatch) => {
 
 export const addLike = (postId) => async (dispatch) => {
   try {
-    const res = await axios.put(`/api/posts/like/${postId}`);
+    const res = await axios.put(
+      `https://backend-devconnect.herokuapp.com/api/posts/like/${postId}`
+    );
     dispatch({
       type: UPDATE_LIKES,
       payload: { postId, likes: res.data },
@@ -43,7 +47,9 @@ export const addLike = (postId) => async (dispatch) => {
 
 export const removeLike = (postId) => async (dispatch) => {
   try {
-    const res = await axios.put(`/api/posts/unlike/${postId}`);
+    const res = await axios.put(
+      `https://backend-devconnect.herokuapp.com/api/posts/unlike/${postId}`
+    );
     dispatch({
       type: UPDATE_LIKES,
       payload: { postId, likes: res.data },
@@ -57,7 +63,9 @@ export const removeLike = (postId) => async (dispatch) => {
 };
 export const deletePost = (postId) => async (dispatch) => {
   try {
-    await axios.delete(`/api/posts/${postId}`);
+    await axios.delete(
+      `https://backend-devconnect.herokuapp.com/api/posts/${postId}`
+    );
     dispatch({
       type: DELETE_POST,
       payload: postId,
@@ -79,7 +87,11 @@ export const addPost = (formData) => async (dispatch) => {
       },
     };
     const post = JSON.stringify(formData);
-    const res = await axios.post("/api/posts", post, config);
+    const res = await axios.post(
+      "https://backend-devconnect.herokuapp.com/api/posts",
+      post,
+      config
+    );
     dispatch({
       type: ADD_POST,
       payload: res.data,
@@ -95,7 +107,9 @@ export const addPost = (formData) => async (dispatch) => {
 
 export const getPost = (id) => async (dispatch) => {
   try {
-    const res = await axios.get(`/api/posts/${id}`);
+    const res = await axios.get(
+      `https://backend-devconnect.herokuapp.com/api/posts/${id}`
+    );
     dispatch({
       type: GET_POST,
       payload: res.data,
@@ -116,7 +130,7 @@ export const addComment = (postId, formData) => async (dispatch) => {
       },
     };
     const res = await axios.post(
-      `/api/posts/comments/${postId}`,
+      `https://backend-devconnect.herokuapp.com/api/posts/comments/${postId}`,
       formData,
       config
     );
@@ -135,7 +149,9 @@ export const addComment = (postId, formData) => async (dispatch) => {
 };
 export const deleteComment = (postId, commentId) => async (dispatch) => {
   try {
-    await axios.delete(`/api/posts/comments/${postId}/${commentId}`);
+    await axios.delete(
+      `https://backend-devconnect.herokuapp.com/api/posts/comments/${postId}/${commentId}`
+    );
 
     dispatch({
       type: REMOVE_COMMENT,
