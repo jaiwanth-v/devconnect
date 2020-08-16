@@ -7,12 +7,19 @@ const ProfileAbout = ({
     skills,
     user: { name },
   },
+  dashboard = true,
 }) => {
   return (
     <div className="profile-about bg-light p-2">
       {bio && (
         <>
-          <h2 className="text-primary">{name.trim().split(" ")[0]}'s Bio</h2>
+          {dashboard ? <h2 className="text-primary">Bio</h2> : null}
+          {!dashboard ? (
+            <h2 className="text-primary">
+              {" "}
+              {name.trim().split(" ")[0]}'s Bio{" "}
+            </h2>
+          ) : null}
           <p>{bio}</p>
           <div className="line"></div>
         </>

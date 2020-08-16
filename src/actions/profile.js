@@ -12,8 +12,8 @@ import { setAlert } from "./alert";
 
 export const getCurrentProfile = () => async (dispatch) => {
   try {
+    await new Promise((r) => setTimeout(r, 50));
     const res = await axios.get("/api/profile/me");
-
     dispatch({
       type: GET_PROFILE,
       payload: res.data,

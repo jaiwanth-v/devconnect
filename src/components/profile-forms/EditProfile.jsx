@@ -50,7 +50,6 @@ const EditProfile = ({
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
   const handleSubmit = (e) => {
-    e.preventDefault();
     createProfile(formData, history, true);
   };
 
@@ -87,7 +86,7 @@ const EditProfile = ({
             label="* Status"
             placeholder="* Status"
             name="status"
-            labelId="selectlabel"
+            labelid="selectlabel"
             value={status}
             variant="outlined"
             onChange={handleChange}
@@ -97,7 +96,7 @@ const EditProfile = ({
             <MenuItem value="Junior Developer">Junior Developer</MenuItem>
             <MenuItem value="Senior Developer">Senior Developer</MenuItem>
             <MenuItem value="Manager">Manager</MenuItem>
-            <MenuItem value="Student or Learning">Student or Learning</MenuItem>
+            <MenuItem value="Student">Student</MenuItem>
             <MenuItem value="Instructor">Instructor or Teacher</MenuItem>
             <MenuItem value="Intern">Intern</MenuItem>
             <MenuItem value="Other">Other</MenuItem>

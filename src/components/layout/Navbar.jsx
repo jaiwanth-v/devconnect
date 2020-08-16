@@ -31,7 +31,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         to="/profiles"
       >
         <Button color="inherit" className="buttonFontSize ">
-          Discover
+          Developers
         </Button>
       </NavLink>
       <NavLink
@@ -67,7 +67,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         to="/profiles"
       >
         <Button color="inherit" className="buttonFontSize">
-          Discover
+          Developers
         </Button>
       </NavLink>
 
@@ -120,7 +120,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
               size={window.matchMedia("(max-width: 800px)").matches ? 17 : 20}
             />
             <div className="NavLinks d-flex">
-              <> {isAuthenticated ? authLinks() : guestLinks()} </>
+              <>{isAuthenticated ? authLinks() : guestLinks()} </>
             </div>
           </Toolbar>
         </Grid>

@@ -37,7 +37,6 @@ img {
   width: 100%;
 }
 
-/* Utilities */
 .container {
   max-width: 1100px;
   margin: auto;
@@ -47,7 +46,6 @@ img {
   margin-bottom: 3rem;
 }
 
-/* Text Styles*/
 .x-large {
   font-size: 4rem;
   line-height: 1.2;
@@ -77,19 +75,6 @@ img {
   color: var(--dark-color);
 }
 
-/* Padding */
-.p {
-  padding: 0.5rem;
-}
-.p-1 {
-  padding: 1rem;
-}
-.p-2 {
-  padding: 2rem;
-}
-.p-3 {
-  padding: 3rem;
-}
 .py {
   padding: 0.5rem 0;
 }
@@ -102,8 +87,6 @@ img {
 .py-3 {
   padding: 3rem 0;
 }
-
-/* Margin */
 
 .my {
   margin: 0.5rem 0;
@@ -158,7 +141,6 @@ img {
   margin: 1.5rem 0;
 }
 
-/* Overlay */
 .dark-overlay {
   background-color: rgba(0, 0, 0, 0.7);
   position: absolute;
@@ -166,60 +148,6 @@ img {
   left: 0;
   width: 100%;
   height: 100%;
-}
-
-/* Forms */
-.form .form-group {
-  margin: 1.2rem 0;
-}
-
-.form .form-text {
-  display: block;
-  margin-top: 0.3rem;
-  color: #888;
-}
-
-.form input[type="text"],
-.form input[type="email"],
-.form input[type="password"],
-.form input[type="date"],
-.form select,
-.form textarea {
-  display: block;
-  width: 100%;
-  padding: 0.4rem;
-  font-size: 1.2rem;
-  border: 1px solid #ccc;
-}
-
-.form input[type="submit"],
-button {
-  font: inherit;
-}
-
-.form .social-input {
-  display: flex;
-}
-
-.form .social-input i {
-  padding: 0.5rem;
-  width: 4rem;
-}
-
-.form .social-input i.fa-twitter {
-  color: #38a1f3;
-}
-.form .social-input i.fa-facebook {
-  color: #3b5998;
-}
-.form .social-input i.fa-instagram {
-  color: #3f729b;
-}
-.form .social-input i.fa-youtube {
-  color: #c4302b;
-}
-.form .social-input i.fa-linkedin {
-  color: #0077b5;
 }
 
 .table th,
@@ -232,43 +160,9 @@ button {
   background: var(--light-color);
 }
 
-/* Navbar */
-/* .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.7rem 2rem;
-  position: fixed;
-  z-index: 1;
-  width: 100%;
-  top: 0;
-  border-bottom: solid 1px var(--primary-color);
-  opacity: 0.9;
-} */
-
-.navbar ul {
-  display: flex;
-}
-
-.navbar a {
-  color: #fff;
-  padding: 0.45rem;
-  margin: 0 0.25rem;
-}
-
-.navbar a:hover {
-  color: #333;
-}
-
-.navbar .welcome span {
-  margin-right: 0.6rem;
-}
-
-/* Landing Page */
 .landing {
   position: absolute;
-  background: url("https://image.freepik.com/free-vector/web-developers-team-work-online-startup-group_93633-58.jpg")
-    no-repeat center center/cover;
+  background: url("./assets/landing.jpg") no-repeat center center/cover;
   z-index: -1;
   bottom: 0;
   height: 100vh;
@@ -287,7 +181,6 @@ button {
   text-align: center;
 }
 
-/* Profiles Page */
 .profile {
   display: grid;
   grid-template-columns: 2fr 4fr 2fr;
@@ -391,7 +284,6 @@ button {
   flex-basis: 20%;
 }
 
-/* Posts Page */
 .post-form .post-form-header {
   background: var(--primary-color);
   padding: 0.5rem;
@@ -427,7 +319,6 @@ button {
   margin-bottom: 0.5rem;
 }
 
-/* Mobile Styles */
 @media (max-width: 700px) {
   .container {
     margin-top: 8rem;
@@ -439,18 +330,20 @@ button {
 
   /* Text Styles */
   .x-large {
-    font-size: 3rem;
+    font-size: 4rem;
   }
 
   .large {
-    font-size: 2rem;
+    font-size: 3rem;
   }
 
   .lead {
     font-size: 1rem;
   }
+  .lead::first-letter {
+    text-transform: capitalize;
+  }
 
-  /* Navbar */
   .navbar {
     display: block;
     text-align: center;
@@ -469,7 +362,6 @@ button {
     display: none;
   }
 
-  /* Profiles Page */
   .profile {
     grid-template-columns: 1fr;
     text-align: center;
@@ -478,8 +370,6 @@ button {
   .profile ul {
     display: none;
   }
-
-  /* Profile Page */
 
   .profile-top img,
   .profile img {

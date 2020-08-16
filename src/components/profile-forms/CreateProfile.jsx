@@ -3,14 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 import { createProfile } from "../../actions/profile";
-import {
-  Button,
-  Select,
-  InputLabel,
-  MenuItem,
-  FormHelperText,
-  TextField,
-} from "@material-ui/core";
+import { Button, MenuItem } from "@material-ui/core";
 import {
   SelectValidator,
   TextValidator,
@@ -79,7 +72,6 @@ const CreateProfile = ({ history, createProfile }) => {
             <MenuItem value="Junior Developer">Junior Developer</MenuItem>
             <MenuItem value="Senior Developer">Senior Developer</MenuItem>
             <MenuItem value="Manager">Manager</MenuItem>
-            <MenuItem value="Student or Learning">Student or Learning</MenuItem>
             <MenuItem value="Instructor">Instructor or Teacher</MenuItem>
             <MenuItem value="Intern">Intern</MenuItem>
             <MenuItem value="Other">Other</MenuItem>
