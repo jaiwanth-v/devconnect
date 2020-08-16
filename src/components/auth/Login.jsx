@@ -33,7 +33,7 @@ const Login = ({ login, isAuthenticated }) => {
           height: "400px",
           borderRadius: "10px",
         }}
-        className="container text-center shadow pt-md-4 p-md-2 mb-md-5 mb-1 bg-white "
+        className="container login text-center shadow p-4 mb-md-5 mb-1 bg-white "
       >
         <h2 className="large text-primary mb-4 ">Sign In</h2>
 

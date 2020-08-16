@@ -44,7 +44,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
           height: "600px",
           borderRadius: "10px",
         }}
-        className="container text-center shadow pt-4 p-2 mb-5 bg-white "
+        className="container register text-center shadow p-4 mb-5 bg-white "
       >
         <h1 className="large text-primary mb-4">Sign Up</h1>
 
@@ -52,7 +52,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
           <div className="form-group">
             <TextValidator
               label="Name"
-              style={{ width: "18rem" }}
+              style={{ width: "16rem" }}
               onChange={onChange}
               name="name"
               variant="outlined"
@@ -65,7 +65,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
           <div className="form-group">
             <TextValidator
               name="email"
-              style={{ width: "18rem" }}
+              style={{ width: "16rem" }}
               validators={["required", "isEmail"]}
               onChange={onChange}
               value={email}
@@ -77,7 +77,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
           <div className="form-group">
             <TextValidator
               label="Password"
-              style={{ width: "18rem" }}
+              style={{ width: "16rem" }}
               onChange={onChange}
               name="password"
               variant="outlined"
@@ -90,7 +90,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
           </div>
           <div className="form-group">
             <TextValidator
-              style={{ width: "18rem" }}
+              style={{ width: "16rem" }}
               label="Confirm Password"
               onChange={onChange}
               name="password2"

@@ -320,7 +320,16 @@ img {
 @media (max-width: 700px) {
   .container {
     margin-top: 8rem;
+
     padding: 0 1rem;
+  }
+  #root > section > div.login {
+    padding: unset;
+    width: 300px !important;
+  }
+  #root > section > div.register {
+    padding: unset;
+    width: 300px !important;
   }
   .skills {
     flex-direction: row !important;
@@ -337,7 +346,7 @@ img {
   }
   #root > nav > header > div > div > svg {
     font-size: 2rem;
-    margin-left: 2.5rem !important;
+    margin-right: 2rem !important;
     width: 2rem !important;
     height: 1.5rem !important;
   }
@@ -345,12 +354,21 @@ img {
     margin-left: 0rem;
   }
 
+  #root
+    > section
+    > div
+    > div.d-flex.flex-column.justify-content-center
+    > div:nth-child(1)
+    > div:nth-child(2)
+    > div.d-flex {
+    justify-content: center;
+  }
   .hide-sm {
     display: none;
   }
 
   .x-large {
-    font-size: 4rem;
+    font-size: 3rem;
   }
 
   .large {
