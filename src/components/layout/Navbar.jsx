@@ -17,7 +17,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const toggleDarkMode = () => {
     setFetchMethod(window.fetch);
 
-    !isDark && window.location.pathname !== "/"
+    !isDark
       ? enableDarkMode({
           brightness: 100,
           contrast: 100,
