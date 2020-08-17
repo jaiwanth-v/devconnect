@@ -204,6 +204,19 @@ export const deleteExperience = (id) => async (dispatch) => {
   }
 };
 
+export const clearProfile = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: CLEAR_PROFILE,
+    });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
 export const deleteEducation = (id) => async (dispatch) => {
   try {
     const res = await axios.delete(

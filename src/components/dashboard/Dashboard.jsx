@@ -1,6 +1,10 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
-import { getCurrentProfile, deleteAccount } from "../../actions/profile";
+import {
+  getCurrentProfile,
+  deleteAccount,
+  clearProfile,
+} from "../../actions/profile";
 import PropTypes from "prop-types";
 import { useEffect } from "react";
 import Spinner from "../layout/Spinner";
@@ -17,12 +21,90 @@ const Dashboard = ({
   history,
   deleteAccount,
   getCurrentProfile,
+  clearProfile,
   auth: { user },
   profile: { profile, loading },
 }) => {
   useEffect(() => {
+    clearProfile();
     getCurrentProfile();
-  }, [getCurrentProfile]);
+  }, [getCurrentProfile, clearProfile]);
+
+  const dashboardProfile = () =>
+    profile !== null ? (
+      <Fragment>
+        <div className="text-center">
+          <DashboardActions />
+          <h2 className="my-3 text-primary">Your Profile: </h2>
+        </div>
+        <div>
+          <Fade in={!loading}>
+            <div className="profile-grid my-1">
+              <ProfileTop profile={profile} />
+              <ProfileAbout profile={profile} />
+              <div className="profile-exp bg-white p-2">
+                <h2 className="text-primary">Experience</h2>
+                {profile && profile.experience.length > 0 ? (
+                  <>
+                    {profile.experience.map((exp) => (
+                      <ProfileExperience key={exp._id} experience={exp} />
+                    ))}
+                  </>
+                ) : (
+                  <h4>No experience credentials</h4>
+                )}
+              </div>
+              <div className="profile-edu bg-white p-2">
+                <h2 className="text-primary">Education</h2>
+                {profile.education.length > 0 ? (
+                  <>
+                    {profile.education.map((edu) => (
+                      <ProfileEducation key={edu._id} education={edu} />
+                    ))}
+                  </>
+                ) : (
+                  <h4>No education credentials</h4>
+                )}
+              </div>
+
+              {profile.githubusername && (
+                <ProfileGithub githubusername={profile.githubusername} />
+              )}
+            </div>
+          </Fade>
+        </div>
+        <div className={`mt-4 ${!profile && "text-center"}`}>
+          <Button
+            style={{ backgroundColor: "rgb(230,0,1)", color: "white" }}
+            variant="contained"
+            onClick={() => deleteAccount(history)}
+          >
+            Delete My Account
+          </Button>
+        </div>
+      </Fragment>
+    ) : (
+      <div className="text-center">
+        <p>
+          You haven't setup a profile yet, please create one to get started.
+        </p>
+        <Link to="/create-profile" className=" my-1">
+          <Button color="primary" variant="contained">
+            Create profile
+          </Button>
+        </Link>
+        <div className={`mt-4 ${!profile && "text-center"}`}>
+          <Button
+            style={{ backgroundColor: "rgb(230,0,1)", color: "white" }}
+            variant="contained"
+            onClick={() => deleteAccount(history)}
+          >
+            Delete My Account
+          </Button>
+        </div>
+      </div>
+    );
+
   return loading && profile == null && user === null ? (
     <Spinner />
   ) : (
@@ -33,72 +115,7 @@ const Dashboard = ({
           <i className="fas fa-user"></i> Welcome{" "}
           {user && user.name.charAt(0).toUpperCase() + user.name.slice(1)}
         </p>
-
-        {profile != null ? (
-          <Fragment>
-            <div className="text-center">
-              <DashboardActions />
-              <h2 className="my-3 text-primary">Your Profile: </h2>
-            </div>
-            <div>
-              <Fade in={!loading}>
-                <div className="profile-grid my-1">
-                  <ProfileTop profile={profile} />
-                  <ProfileAbout profile={profile} />
-                  <div className="profile-exp bg-white p-2">
-                    <h2 className="text-primary">Experience</h2>
-                    {profile && profile.experience.length > 0 ? (
-                      <>
-                        {profile.experience.map((exp) => (
-                          <ProfileExperience key={exp._id} experience={exp} />
-                        ))}
-                      </>
-                    ) : (
-                      <h4>No experience credentials</h4>
-                    )}
-                  </div>
-                  <div className="profile-edu bg-white p-2">
-                    <h2 className="text-primary">Education</h2>
-                    {profile.education.length > 0 ? (
-                      <>
-                        {profile.education.map((edu) => (
-                          <ProfileEducation key={edu._id} education={edu} />
-                        ))}
-                      </>
-                    ) : (
-                      <h4>No education credentials</h4>
-                    )}
-                  </div>
-
-                  {profile.githubusername && (
-                    <ProfileGithub githubusername={profile.githubusername} />
-                  )}
-                </div>
-              </Fade>
-            </div>
-          </Fragment>
-        ) : (
-          <div className="text-center">
-            <p>
-              You haven't setup a profile yet, please create one to get started.
-            </p>
-            <Link to="/create-profile" className=" my-1">
-              <Button color="primary" variant="contained">
-                Create profile
-              </Button>
-            </Link>
-          </div>
-        )}
-
-        <div className={`mt-4 ${!profile && "text-center"}`}>
-          <Button
-            style={{ backgroundColor: "rgb(230,0,1)", color: "white" }}
-            variant="contained"
-            onClick={() => deleteAccount(history)}
-          >
-            Delete My Account
-          </Button>
-        </div>
+        {dashboardProfile()}
       </div>
     </Fade>
   );
@@ -114,8 +131,11 @@ Dashboard.propTypes = {
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
   deleteAccount: PropTypes.func.isRequired,
+  clearProfile: PropTypes.func.isRequired,
 };
 
 export default withRouter(
-  connect(mapStateToProps, { getCurrentProfile, deleteAccount })(Dashboard)
+  connect(mapStateToProps, { getCurrentProfile, deleteAccount, clearProfile })(
+    Dashboard
+  )
 );

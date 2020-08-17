@@ -26,7 +26,7 @@ const Profile = ({
   return (
     <>
       {profile === null || loading ? (
-        <Spinner />
+        <Spinner profilePage={true} />
       ) : (
         <div>
           <div className="text-center">

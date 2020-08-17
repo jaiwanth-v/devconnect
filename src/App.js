@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from "react";
 import "./App.css";
 import Landing from "./components/layout/Landing";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import { Provider } from "react-redux";
